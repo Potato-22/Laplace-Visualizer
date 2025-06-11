@@ -55,7 +55,24 @@ def compute_field(phi, h):
 st.set_page_config(layout="wide")
 st.title("Laplace Equation Visualizer")
 
+with st.sidebar.expander("About this app"):
+    st.markdown("""
+    **Laplace Equation Visualizer**
 
+    This interactive app numerically solves the 2D Laplace equation  
+    using the Gauss-Seidel method with Successive Over-Relaxation (SOR)  
+    on a square grid with customizable boundary voltages (Dirichlet conditions).
+
+    Features:
+    - Adjustable grid size and boundary voltages
+    - Animated convergence (optional)
+    - 2D and 3D visualization of electric potential
+    - Visualization of electric field (gradient)
+    - 1D cross-sections for analysis
+
+    The solution shows the steady-state electric potential inside the box.
+    (hopefully)
+    """)
     
 with st.sidebar:
     st.header("Grid & Solver Parameters")
