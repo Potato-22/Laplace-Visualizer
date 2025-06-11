@@ -5,6 +5,28 @@ import numpy as np
 import matplotlib.pyplot as plt  # Static plotting
 import plotly.graph_objects as go  # Interactive 3D plotting
 
+# -----------------------------------
+# "About" Section in Sidebar
+# -----------------------------------
+with st.sidebar.expander("About this app"):
+    st.markdown("""
+    **Laplace Equation Visualizer**
+
+    This interactive app numerically solves the 2D Laplace equation  
+    using the Gauss-Seidel method with Successive Over-Relaxation (SOR)  
+    on a square grid with customizable boundary voltages (Dirichlet conditions).
+
+    Features:
+    - Adjustable grid size and boundary voltages
+    - Animated convergence (optional)
+    - 2D and 3D visualization of electric potential
+    - Visualization of electric field (gradient)
+    - 1D cross-sections for analysis
+
+    The solution shows the steady-state electric potential inside the box,
+    which is useful for visualizing electrostatics! (hopefully)
+    """)
+
 # ------------------------------------------------------------------
 # function: Gauss–Seidel iteration with Successive Over-Relaxation (SOR)
 # ------------------------------------------------------------------
