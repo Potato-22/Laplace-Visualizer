@@ -95,7 +95,7 @@ with st.sidebar:
         The solution shows the steady-state electric potential inside the box.(hopefully)
         """)
 
-    st.markdown("<hr style='border:1px solid #00BFFF'>", unsafe_allow_html=True)
+    # st.markdown("<hr style='border:1px solid #00BFFF'>", unsafe_allow_html=True)
 
     st.header("Grid & Solver Parameters")
     N = st.slider(
@@ -114,21 +114,15 @@ with st.sidebar:
     h = 1.0 / (N - 1)
     min_tol = h**2
 
-    st.markdown(
-        f"<span style='font-size: 0.9em'>"
-        f"Grid spacing: <b>$h = \\frac{{1}}{{N-1}} = {h:.5f}$</b>"
-        "</span>",
-        unsafe_allow_html=True,
-    )
-
-    st.markdown("<hr style='border:1px solid #00BFFF'>", unsafe_allow_html=True)
+    # st.markdown("<hr style='border:1px solid #00BFFF'>", unsafe_allow_html=True)
+    
     st.subheader("Boundary Voltages (V)")
     V_top = st.number_input("Top", value=1.00, step=0.50, format="%.2f", help="Potential on top edge")
     V_bottom = st.number_input("Bottom", value=0.00, step=0.50, format="%.2f", help="Potential on bottom edge")
     V_left = st.number_input("Left", value=0.00, step=0.50, format="%.2f", help="Potential on left edge")
     V_right = st.number_input("Right", value=0.00, step=0.50, format="%.2f", help="Potential on right edge")
 
-    st.markdown("<hr style='border:1px solid #00BFFF'>", unsafe_allow_html=True)
+    # st.markdown("<hr style='border:1px solid #00BFFF'>", unsafe_allow_html=True)
     
     st.subheader("Solver Parameters")
     tol = st.number_input(
@@ -142,15 +136,19 @@ with st.sidebar:
     # Show recommended minimum tol
     st.markdown(
         f"<span style='font-size: 0.9em'>"
-        f"Recommended minimum tol:<br><b>$h^2 = {min_tol:.2e}$</b>"
+        f"Practical lower limit for tolerance:<br>"
+        f"<b>$\\epsilon_{{\\text{{min}}}} = {min_tol:.2e}$</b>"
         "</span>",
         unsafe_allow_html=True,
     )
+    
     with st.expander("What is Tolerance?"):
         st.markdown(
-            "Sets the smallest change in the solution allowed at each step before the solver stops. "
-            "Lower values make the result more precise, but take longer to compute. "
-            "Don't set it smaller than the recommended $h^2$."
+            "Tolerance sets the smallest change in the solution allowed at each step before the solver stops. "
+            "Lower values make the result more precise, but take longer to compute.  \n\n"
+            "**Don't set it lower than the practical lower limit:**  \n"
+            r"$\epsilon_{\text{min}} = h^2 = \left(\frac{1}{N-1}\right)^2$."
+            " Setting tolerance below $h^2$ won't help, because the grid error is already larger."
         )
 
     omega_opt = 2.0 / (1.0 + np.sin(np.pi / (N - 1)))
@@ -166,6 +164,7 @@ with st.sidebar:
             - $\omega = 1$ means standard Gauss-Seidel (slower).
             - Values up to 2 can accelerate convergence.
             **Tip:** Use the suggested optimal value for your grid.
+            This is calculated from $\omega_{opt} \approx  \frac{2}{1 + \sin(\frac{\pi}{N-1})} $
             """
         )
 
@@ -180,7 +179,8 @@ with st.sidebar:
             "**Tip:** Use higher values if you set a very low tolerance or use a large grid."
         )
 
-    st.markdown("<hr style='border:1px solid #00BFFF'>", unsafe_allow_html=True)
+    # st.markdown("<hr style='border:1px solid #00BFFF'>", unsafe_allow_html=True)
+    
     st.subheader("Display Options")
     # Colormap selector
     colormap = st.selectbox("Colormap", ["viridis", "plasma", "magma", "cividis", "turbo"], index=0)
