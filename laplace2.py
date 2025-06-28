@@ -92,7 +92,7 @@ with st.sidebar:
         - Visualization of electric field (gradient)
         - 1D cross-sections for analysis
 
-        The solution shows the steady-state electric potential inside the box.(hopefully)
+        The solution shows the steady-state electric potential inside the box. 
         """)
 
     # st.markdown("<hr style='border:1px solid #00BFFF'>", unsafe_allow_html=True)
